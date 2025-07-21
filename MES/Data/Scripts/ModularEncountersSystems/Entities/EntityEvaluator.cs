@@ -711,11 +711,13 @@ namespace ModularEncountersSystems.Entities {
 
 
 			// Add thread based on the number of blocks.
-            result += grid.AllBlocks.Count / 100f;
+            result += (float)(grid.AllBlocks.Count 
+				* (currentThreatSettings.UseThreatPerBlockMultiplier ? currentThreatSettings.ThreatPerBlockMultiplier : 0.0F));
 
 
 			// Add threat based on the size of the bounding box of the grid. (Original)
-            result += (float)Vector3D.Distance(grid.CubeGrid.WorldAABB.Min, grid.CubeGrid.WorldAABB.Max) * 0.25F;
+            result += (float)(Vector3D.Distance(grid.CubeGrid.WorldAABB.Min, grid.CubeGrid.WorldAABB.Max)
+				* (currentThreatSettings.UseGridBoundingBoxThreatMultiplier ? currentThreatSettings.BoundingBoxSizeMultiplier : 0.0F));
 
 
 			// Multiply threat based on the type of grid we are evaluating
@@ -743,7 +745,7 @@ namespace ModularEncountersSystems.Entities {
 
             }
 
-			// This was in the original code and I can not convince myself it is useful. Bye.
+			// This was in the original code. It's no longer necessary.
             //grid.ThreatScore = result * 0.70f;
 
             grid.LastThreatCalculationTime = MyAPIGateway.Session.GameDateTime;         

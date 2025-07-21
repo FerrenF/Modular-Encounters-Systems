@@ -43,6 +43,13 @@ namespace ModularEncountersSystems.Configuration {
     public bool UsePowerMultipliers;
     public bool UseSizeMultipliers;
 
+    public bool UseGridBoundingBoxThreatMultiplier;
+    public double BoundingBoxSizeMultiplier;
+
+
+    public bool UseThreatPerBlockMultiplier;
+    public double ThreatPerBlockMultiplier;
+
     [XmlIgnore]
     public bool ConfigLoaded;
 
@@ -64,6 +71,10 @@ namespace ModularEncountersSystems.Configuration {
 
             UsePowerMultipliers = true;
             UseSizeMultipliers = true;
+            UseGridBoundingBoxThreatMultiplier = true;
+            UseThreatPerBlockMultiplier = true;
+            BoundingBoxSizeMultiplier = 0.25; // Original value.
+            ThreatPerBlockMultiplier = 0.01; // Original value equivalent.
 
             ConfigLoaded = false;
 
@@ -71,9 +82,13 @@ namespace ModularEncountersSystems.Configuration {
             EditorReference = new Dictionary<string, Func<string, object, bool>> {
 
 				{"UsePowerMultipliers", (s, o) => EditorTools.SetCommandValueBool(s, ref UsePowerMultipliers) },
-				{"UseSizeMultipliers", (s, o) => EditorTools.SetCommandValueBool(s, ref UseSizeMultipliers) }				
+				{"UseSizeMultipliers", (s, o) => EditorTools.SetCommandValueBool(s, ref UseSizeMultipliers) },
+                {"UseGridBoundingBoxThreatMultiplier", (s, o) => EditorTools.SetCommandValueBool(s, ref UseGridBoundingBoxThreatMultiplier) },
+                {"UseThreatPerBlockMultiplier", (s, o) => EditorTools.SetCommandValueBool(s, ref UseThreatPerBlockMultiplier) },
+                {"BoundingBoxSizeMultiplier", (s, o) => EditorTools.SetCommandValueDouble(s, ref BoundingBoxSizeMultiplier) },
+                {"ThreatPerBlockMultiplier", (s, o) => EditorTools.SetCommandValueDouble(s, ref ThreatPerBlockMultiplier) }
 
-			};
+            };
 
 		}
 
