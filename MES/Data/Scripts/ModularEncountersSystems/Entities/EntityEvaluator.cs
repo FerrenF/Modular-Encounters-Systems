@@ -710,38 +710,15 @@ namespace ModularEncountersSystems.Entities {
             result += GetTargetValueFromBlockList(grid.Turrets, "Turrets", true);
 
 
-
-            /*
-			 * 
-			 * OLD NEWS
-			 * 
-			 * 
-            //Factor Power
-            result += (grid.PowerOutput().Y > 0) ? (grid.PowerOutput().Y / 10) : 0;
-
-			//Factor Total Block Count
-			result += grid.AllBlocks.Count / 100;
-
-			//Factor Grid Box Size
-			result += (float)Vector3D.Distance(grid.CubeGrid.WorldAABB.Min, grid.CubeGrid.WorldAABB.Max) / 4;
-
-			//Factor Static/Dynamic
-			if (grid.CubeGrid.IsStatic)
-				result *= 0.75f;
-
-			//Factor Cube Size
-			if (grid.CubeGrid.GridSizeEnum == MyCubeSize.Large)
-				result *= 2.5f;
-			else
-				result *= 0.5f;
-
-			grid.ThreatScore = result * 0.70f;
-			grid.LastThreatCalculationTime = MyAPIGateway.Session.GameDateTime;
-			*/
-
+			// Add thread based on the number of blocks.
             result += grid.AllBlocks.Count / 100f;
-            result += (float)Vector3D.Distance(grid.CubeGrid.WorldAABB.Min, grid.CubeGrid.WorldAABB.Max) / 4f;
 
+
+			// Add threat based on the size of the bounding box of the grid. (Original)
+            result += (float)Vector3D.Distance(grid.CubeGrid.WorldAABB.Min, grid.CubeGrid.WorldAABB.Max) * 0.25F;
+
+
+			// Multiply threat based on the type of grid we are evaluating
             if (currentThreatSettings.UseSizeMultipliers)
             {
                 if (grid.CubeGrid.GridSizeEnum == MyCubeSize.Large)
@@ -753,6 +730,7 @@ namespace ModularEncountersSystems.Entities {
                     result *= (float)currentThreatSettings.SizeMultipliers.StationMultiplier;
             }
 
+			// Add threat based on the amount of power being produced, modified by the type of grid producing power.
             if (currentThreatSettings.UsePowerMultipliers && grid.PowerOutput().Y > 0)
             {
                 if (grid.CubeGrid.GridSizeEnum == MyCubeSize.Large)
@@ -765,7 +743,9 @@ namespace ModularEncountersSystems.Entities {
 
             }
 
-            grid.ThreatScore = result * 0.70f;
+			// This was in the original code and I can not convince myself it is useful. Bye.
+            //grid.ThreatScore = result * 0.70f;
+
             grid.LastThreatCalculationTime = MyAPIGateway.Session.GameDateTime;         
 
 
@@ -824,25 +804,25 @@ namespace ModularEncountersSystems.Entities {
 
             float result = 0;
 			ThreatDefinition categoryThreatDef = null;
-			            // Try to get category threat once
-            currentThreatSettings.CategoryThreatDefinitions.TryGetValue(categoryName, out categoryThreatDef);
+			
+			// Try to get category threat once dontalue(categoryName, out categoryThreatDef);
 
             foreach (var block in blockList)
             {
                 if (block.IsClosed() || !block.Functional)
                     continue;
 
-                // Try block-specific threat first
+                // Try block-specific (block type) threat first
                 ThreatDefinition threatDef = null;
-                if (!currentThreatSettings.BlockThreatDefinitions.TryGetValue(block.Block.BlockDefinition.SubtypeId, out threatDef))
+                if (!currentThreatSettings.BlockThreatDefinitions.TryGetValue(block.Block.BlockDefinition.TypeIdString, out threatDef))
                 {
-                    // Fall back to category-level threat
+                    // Fall back to category-level threat if we dont find anything more granular
                     threatDef = categoryThreatDef;
                 }
 
                 if (threatDef == null)
                 {
-                    // No valid threat definition, skip this block
+                    // No valid threat definition at all, skip this block
                     continue;
                 }
 
@@ -851,10 +831,16 @@ namespace ModularEncountersSystems.Entities {
 
                 float value = (float)(threatDef.Threat * threatDef.Multiplier);
 
+				//we are going to be nice and use the essentially useless scanInventory variable. i mean, i guess it does save a few cycles not having to check all the other shit. ehh. fair.
                 if (scanInventory && block.Block.HasInventory && block.Block.GetInventory().MaxVolume > 0)
                 {
+					// this is a ratio of the block's current volume to the block's max volume, or "full-ness" perhaps.
                     float invMod = ((float)block.Block.GetInventory().CurrentVolume / (float)block.Block.GetInventory().MaxVolume) + 1;
+
+
                     if (!float.IsNaN(invMod))
+
+						// Multiply the full-ness by the PotentialVolume threat modifier.
                         value *= (float)(invMod * threatDef.PotentialVolume);
                 }
 
