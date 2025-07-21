@@ -1,0 +1,1014 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B8FDCF58-466F-4448-9F5C-C003C9BFA2EB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ModularEncounterSystems</RootNamespace>
+    <AssemblyName>ModularEncounterSystems</AssemblyName>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <LangVersion>6</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>2</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <WarningLevel>2</WarningLevel>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>6</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>6</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CppNet">
+      <HintPath>..\ModSDK\Bin64_Profile\CppNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DirectShowLib">
+      <HintPath>..\ModSDK\Bin64_Profile\DirectShowLib.dll</HintPath>
+    </Reference>
+    <Reference Include="EmptyKeys.UserInterface">
+      <HintPath>..\ModSDK\Bin64_Profile\EmptyKeys.UserInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="EmptyKeys.UserInterface.Core">
+      <HintPath>..\ModSDK\Bin64_Profile\EmptyKeys.UserInterface.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EOSSDK">
+      <HintPath>..\ModSDK\Bin64_Profile\EOSSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="GameAnalytics.Mono">
+      <HintPath>..\ModSDK\Bin64_Profile\GameAnalytics.Mono.dll</HintPath>
+    </Reference>
+    <Reference Include="HavokWrapper">
+      <HintPath>..\ModSDK\Bin64_Profile\HavokWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis">
+      <HintPath>..\ModSDK\Bin64_Profile\Microsoft.CodeAnalysis.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.CSharp">
+      <HintPath>..\ModSDK\Bin64_Profile\Microsoft.CodeAnalysis.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="netstandard">
+      <HintPath>..\ModSDK\Bin64_Profile\netstandard.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\ModSDK\Bin64_Profile\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="ProtoBuf.Net">
+      <HintPath>..\ModSDK\Bin64_Profile\ProtoBuf.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="ProtoBuf.Net.Core">
+      <HintPath>..\ModSDK\Bin64_Profile\ProtoBuf.Net.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="RecastDetourWrapper">
+      <HintPath>..\ModSDK\Bin64_Profile\RecastDetourWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\ModSDK\Bin64_Profile\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Sandbox.Common">
+      <HintPath>..\ModSDK\Bin64_Profile\Sandbox.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Sandbox.Game">
+      <HintPath>..\ModSDK\Bin64_Profile\Sandbox.Game.dll</HintPath>
+    </Reference>
+    <Reference Include="Sandbox.Game.XmlSerializers">
+      <HintPath>..\ModSDK\Bin64_Profile\Sandbox.Game.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Sandbox.Graphics">
+      <HintPath>..\ModSDK\Bin64_Profile\Sandbox.Graphics.dll</HintPath>
+    </Reference>
+    <Reference Include="Sandbox.RenderDirect">
+      <HintPath>..\ModSDK\Bin64_Profile\Sandbox.RenderDirect.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX">
+      <HintPath>..\ModSDK\Bin64_Profile\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.D3DCompiler">
+      <HintPath>..\ModSDK\Bin64_Profile\SharpDX.D3DCompiler.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Desktop">
+      <HintPath>..\ModSDK\Bin64_Profile\SharpDX.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11">
+      <HintPath>..\ModSDK\Bin64_Profile\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DirectInput">
+      <HintPath>..\ModSDK\Bin64_Profile\SharpDX.DirectInput.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI">
+      <HintPath>..\ModSDK\Bin64_Profile\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.XAudio2">
+      <HintPath>..\ModSDK\Bin64_Profile\SharpDX.XAudio2.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.XInput">
+      <HintPath>..\ModSDK\Bin64_Profile\SharpDX.XInput.dll</HintPath>
+    </Reference>
+    <Reference Include="SixLabors.Core">
+      <HintPath>..\ModSDK\Bin64_Profile\SixLabors.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SixLabors.ImageSharp">
+      <HintPath>..\ModSDK\Bin64_Profile\SixLabors.ImageSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SpaceEngineers.Game">
+      <HintPath>..\ModSDK\Bin64_Profile\SpaceEngineers.Game.dll</HintPath>
+    </Reference>
+    <Reference Include="SpaceEngineers.ObjectBuilders">
+      <HintPath>..\ModSDK\Bin64_Profile\SpaceEngineers.ObjectBuilders.dll</HintPath>
+    </Reference>
+    <Reference Include="SpaceEngineers.ObjectBuilders.XmlSerializers">
+      <HintPath>..\ModSDK\Bin64_Profile\SpaceEngineers.ObjectBuilders.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="Steamworks.NET">
+      <HintPath>..\ModSDK\Bin64_Profile\Steamworks.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.8.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations">
+      <HintPath>..\ModSDK\Bin64_Profile\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\ModSDK\Bin64_Profile\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Metadata">
+      <HintPath>..\ModSDK\Bin64_Profile\System.Reflection.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages">
+      <HintPath>..\ModSDK\Bin64_Profile\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions">
+      <HintPath>..\ModSDK\Bin64_Profile\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Torch">
+      <HintPath>..\..\..\Torch\Torch.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Ansel">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.Ansel.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Audio">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.Audio.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.EOS">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.EOS.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.EOS.XmlSerializers">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.EOS.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Game">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.Game.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Game.XmlSerializers">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.Game.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Input">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Library">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Math">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Math.XmlSerializers">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.Math.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Mod.Io">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.Mod.Io.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.NativeAftermath">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.NativeAftermath.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.NativeWrapper">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.NativeWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Network">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Platform.Windows">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.Platform.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Render">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.Render.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Render11">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.Render11.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Scripting">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Steam">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.Steam.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.UserInterface">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.UserInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.XmlSerializers">
+      <HintPath>..\ModSDK\Bin64_Profile\VRage.XmlSerializers.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Admin\Diagnostics.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\API\ActionCustomMethod.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\API\AddonManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\API\AiEnabledApi.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\API\APIs.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\API\CoreSystemsApiBase.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\API\CoreSystemsApiBlocks.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\API\CoreSystemsApiDefs.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\API\CoreSystemsApiPhantoms.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\API\CoreSystemsPbApi.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\API\DragApi.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\API\HudAPIv2.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\API\LocalAPI.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\API\MESApi.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\API\NebulaAPI.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\API\ShieldApi.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\API\WaterApi.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\BehaviorManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\CargoShip.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\CoreBehavior.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\EncounterWaypoint.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Escort.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Fighter.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\FighterPlane.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\HorseFighter.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Horsefly.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Hunter.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\IBehavior.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\IBehaviorSubClass.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Nautical.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Passive.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Patrol.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Scout.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Sniper.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Strike.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\AutoPilot\AutoPilotProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\AutoPilot\AutoPilotProfileBak.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\AutoPilot\AutoPilotState.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\AutoPilot\AutoPilotSystem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\AutoPilot\CollisionResult.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\AutoPilot\CollisionSystem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\AutoPilot\FakeRoverPathing.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\AutoPilot\GyroscopeProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\AutoPilot\PathNode.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\AutoPilot\RotationSystem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\AutoPilot\TargetingSystem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\AutoPilot\TargetProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\AutoPilot\ThrustAction.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\AutoPilot\ThrusterProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\AutoPilot\ThrustSystem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\AutoPilot\WaterPathing.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\BroadcastSystem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\CoreBehaviorStatus.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\DamageSystem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\DespawnSystem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\DiagnosticSystem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\EscortSystem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\GridSystem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\HackingSystem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\HeartbeatSystem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\OwnerSystem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Profiles\MissileProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\StoredSettings.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\SubclassValues.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Trigger\ActionProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Trigger\ActionReferenceProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Trigger\ActionSystem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Trigger\ChatProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Trigger\CommandProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Trigger\ConditionProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Trigger\ConditionReferenceProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Trigger\HackerProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Trigger\PlayerConditionProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Trigger\SpawnProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Trigger\TriggerChecks.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Trigger\TriggerGroupProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Trigger\TriggerProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Trigger\TriggerSystem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Trigger\WaypointProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Weapons\BaseWeapon.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Weapons\ControllerWeapon.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Weapons\CoreWeapon.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Weapons\IWeapon.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Weapons\RegularWeapon.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Weapons\WeaponSystem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Weapons\WeaponSystemReference.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Behavior\Vulture.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\BaseBlockLogic.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\BeamWeapon.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\BlockLogicManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\DisposableBeaconLogic.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\DrillInhibitor.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\EnergyInhibitor.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\IBlockLogic.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\InfiniteTank.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\InhibitorLogic.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\JetpackInhibitor.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\JumpDriveInhibitor.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\NanobotInhibitor.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\NpcGyro.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\NpcThrusterLogic.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\NpcTurretController.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\PlayerInhibitor.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\ProximityExplosiveModule.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\PublicUsableBlock.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\ReactorPrimingLogic.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\ResearchTerminal.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\BlockLogic\ThrustSettings.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\ConfigBase.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\ConfigBossEncounters.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\ConfigCombat.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\ConfigCreatures.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\ConfigCustomBlocks.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\ConfigDroneEncounters.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\ConfigGeneral.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\ConfigGrids.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\ConfigOtherNPCs.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\ConfigPlanetaryCargoShips.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\ConfigPlanetaryInstallations.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\ConfigProgression.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\ConfigRandomEncounters.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\ConfigSpaceCargoShips.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\ConfigThreat.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\EditorTools.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\IConfig.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\ISpawnType.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\PresetConfigs.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\SavedInternalData.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Configuration\Settings.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Core\MES_SessionCore.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Create\Create.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Entities\BlockEntity.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Entities\BlockManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Entities\EntityBase.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Entities\EntityEvaluator.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Entities\EntityWatcher.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Entities\GridEntity.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Entities\GridManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Entities\ITarget.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Entities\PlanetEntity.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Entities\PlanetManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Entities\PlayerEntity.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Entities\PlayerManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Entities\SafeZoneEntity.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Entities\SafeZoneManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Events\Action\EventActionExecution.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Events\Action\EventActionProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Events\Action\EventActionReference.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Events\Action\EventBroadcastSystem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Events\Condition\EventConditions.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Events\Condition\EventController.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Events\Event.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Events\EventGroupProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Events\EventManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Events\EventProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Events\TemplateEventGroup.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Files\Beam.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Files\DialogueBank.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Files\StoreItems.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Files\TextTemplate.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\BlockCollectionHelper.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\CollectionHelper.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\CollisionHelper.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\CommandHelper.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\CustomValueHelper.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\DamageHelper.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\DebugHelper.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\DefinitionHelper.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\EconomyHelper.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\EffectHelper.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\Enums.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\FactionHelper.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\IdsReplacer.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\InventoryHelper.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\IPlanetVectors.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\MathTools.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\OwnershipHelper.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\ProfileManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\RelationManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\SerializationHelper.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\SpawnResources.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\TagParse.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\TargetHelper.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\Time.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\Utilities.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Helpers\VectorHelper.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Logging\BehaviorLogger.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Logging\LoggerTools.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Logging\SpawnLogger.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Mission\Contract.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Mission\InGameContractManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Mission\Mission.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Mission\MissionProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Progression\ProgressionContainer.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Progression\ProgressionDataContainer.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Progression\ProgressionDataManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Progression\ProgressionManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\BehaviorSpawnHelper.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\BotSpawner.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Manipulation\ArmorModuleReplacement.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Manipulation\BehaviorBuilder.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Manipulation\BlockReplacement.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Manipulation\BlockStates.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Manipulation\CosmeticEffects.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Manipulation\GeneralManipulations.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Manipulation\NPCShieldManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Manipulation\PrefabInventory.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Manipulation\PrefabManipulation.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Manipulation\RandomNameGenerator.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Manipulation\StorageTools.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Manipulation\WeaponRandomizer.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\PathPlacements.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\PlayerSpawnWatcher.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\PrefabContainer.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\PrefabSpawner.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Procedural\BlockBuilderData.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Procedural\BlockIDs.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Procedural\Builder\BuilderTools.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Procedural\Builder\LineBuilder.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Procedural\Builder\LinePattern.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Procedural\Builder\NacelleArmBuilder.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Procedural\Builder\PatternSearch.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Procedural\Hull\HullFeatures.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Procedural\Hull\HullGeneration.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Procedural\Hull\HullGreeble.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Procedural\Hull\HullTypeBase.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Procedural\Hull\HullTypeSomerset.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Procedural\Hull\IHullType.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Procedural\ProceduralShipManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Procedural\ShipConstruct.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Procedural\ShipRules.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\BlockReplacementProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\BotSpawnProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\ContractBlockProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\DerelictionProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\FactionIconProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\GlobalConditionProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\ImprovedSpawnGroup.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\LootGroup.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\LootProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\ManipulationGroup.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\ManipulationProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\PrefabDataProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\PrefabGravityProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\ReplenishmentProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\SafezoneProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\ShipyardProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\SpawnConditionsGroup.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\SpawnConditionsProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\StoreProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\SuitUpgradesProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\WeaponModRulesProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\Profiles\ZoneConditionsProfile.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\SpawnConditions.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\SpawnGroupCollection.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\SpawnGroupManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\SpawnRequest.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\StaticEncounter.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\WatchedPlayer.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\WaveManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Spawning\WaveSpawner.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Sync\BalanceChangeMessage.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Sync\ChatManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Sync\ChatMessage.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Sync\EffectManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Sync\Effects.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Sync\ReputationAnnounceManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Sync\ReputationChange.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Sync\ReputationMessage.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Sync\ShipyardTransaction.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Sync\ShipyardTransactionResult.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Sync\SuitUpgradeTransaction.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Sync\SyncContainer.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Sync\SyncManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\BehaviorRegister.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\ConsumableItemTimer.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\CutVoxels.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\DebugRotationData.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\DebugShapes.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\DebugSpawnSingleBlocks.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\DelayedCommand.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\FixBlock.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\GridCleanup.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\GridDamageWatcher.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\GridJumpTracker.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\ITaskItem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\NewGrid.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\PlayerSolarModule.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\PrefabDiagnosticsTask.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\SpawnAllPrefabs.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\SubscribeTask.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\TaskItem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\TaskProcessor.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\TerminalTransactionRefresh.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\TimedAction.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\WeaponRandomizedGrids.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Tasks\WeatherSwitch.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Terminal\ControlManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Terminal\ProceduralShipControls.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Terminal\ProgramBlockControls.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Terminal\ShipyardControls.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Terminal\SuitModificationControls.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Watchers\CargoShipWatcher.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Watchers\Cleaning.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Watchers\EventWatcher.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Watchers\GridCleanupData.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Watchers\GridCleanupExemption.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Wiki\WikiItem.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\World\CombatPhaseManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\World\EnvironmentEvaluation.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\World\LegacyActiveNPC.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\World\NpcData.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\World\NpcManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\World\SimulatedGrid.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\World\TimeoutManagement.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Zones\KnownPlayerLocationManager.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Zones\Zone.cs" />
+    <Compile Include="Data\Scripts\ModularEncountersSystems\Zones\ZoneManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config-Threat.xml" />
+    <Content Include="Data\StoreItems\MES-StoreItems-Example.xml" />
+    <Content Include="Data\TextTemplates\MES-TextTemplate-Example.xml" />
+    <Content Include="metadata.mod" />
+    <Content Include="Textures\Icons\greendoticon.dds" />
+    <Content Include="Textures\Icons\greendoticon.png" />
+    <Content Include="Textures\Icons\ML_Suit_Upgrade.png" />
+    <Content Include="thumb.jpg" />
+    <Content Include="WebWiki\readme.txt" />
+    <Content Include="WebWiki\site\404.html" />
+    <Content Include="WebWiki\site\Action\index.html" />
+    <Content Include="WebWiki\site\AdminConfig_AdminDebugOptions\index.html" />
+    <Content Include="WebWiki\site\AdminConfig_AiEnabled Bot Spawning\index.html" />
+    <Content Include="WebWiki\site\AdminConfig_Boss Encounters\index.html" />
+    <Content Include="WebWiki\site\AdminConfig_Clean-Up\index.html" />
+    <Content Include="WebWiki\site\AdminConfig_Combat\index.html" />
+    <Content Include="WebWiki\site\AdminConfig_Creatures\index.html" />
+    <Content Include="WebWiki\site\AdminConfig_General\index.html" />
+    <Content Include="WebWiki\site\AdminConfig_Grid\index.html" />
+    <Content Include="WebWiki\site\AdminConfig_Planetary Cargo Ships\index.html" />
+    <Content Include="WebWiki\site\AdminConfig_Planetary Installations\index.html" />
+    <Content Include="WebWiki\site\AdminConfig_Random Encounters\index.html" />
+    <Content Include="WebWiki\site\AdminConfig_Space Cargo Ships\index.html" />
+    <Content Include="WebWiki\site\AdminConfig_Spawn Filtering\index.html" />
+    <Content Include="WebWiki\site\AdminConfig_Timeout\index.html" />
+    <Content Include="WebWiki\site\AdminConfig_Wave Spawner\index.html" />
+    <Content Include="WebWiki\site\Autopilot\index.html" />
+    <Content Include="WebWiki\site\Bot-Spawn\index.html" />
+    <Content Include="WebWiki\site\Bugs,-Issues,-or-Crashes\index.html" />
+    <Content Include="WebWiki\site\Chat\index.html" />
+    <Content Include="WebWiki\site\Command\index.html" />
+    <Content Include="WebWiki\site\Condition\index.html" />
+    <Content Include="WebWiki\site\Core-Behavior\index.html" />
+    <Content Include="WebWiki\site\css\atom-dark-one.min.css" />
+    <Content Include="WebWiki\site\css\bundle.css" />
+    <Content Include="WebWiki\site\css\colors.css" />
+    <Content Include="WebWiki\site\css\fonts\kpn-metric-bold.svg" />
+    <Content Include="WebWiki\site\css\fonts\kpn-metric-light.svg" />
+    <Content Include="WebWiki\site\css\fonts\kpn-metric-normal.svg" />
+    <Content Include="WebWiki\site\css\fonts\kpn-metric-semi-bold.svg" />
+    <Content Include="WebWiki\site\css\fonts\kpn-service-icons.svg" />
+    <Content Include="WebWiki\site\css\fonts\kpn-ui-icons.svg" />
+    <Content Include="WebWiki\site\css\ir-black.min.css" />
+    <Content Include="WebWiki\site\css\theme.css" />
+    <Content Include="WebWiki\site\Custom-Event-Actions-and-ScenarioTools\index.html" />
+    <Content Include="WebWiki\site\Datapad\index.html" />
+    <Content Include="WebWiki\site\Dereliction\index.html" />
+    <Content Include="WebWiki\site\Economy-Stations-FAQ\index.html" />
+    <Content Include="WebWiki\site\Encounter-Attributes\index.html" />
+    <Content Include="WebWiki\site\Encounter-Guide\index.html" />
+    <Content Include="WebWiki\site\Event-Action\index.html" />
+    <Content Include="WebWiki\site\Event-Conditions\index.html" />
+    <Content Include="WebWiki\site\Event\index.html" />
+    <Content Include="WebWiki\site\fonts\kpn-metric-bold.svg" />
+    <Content Include="WebWiki\site\fonts\kpn-metric-light.svg" />
+    <Content Include="WebWiki\site\fonts\kpn-metric-normal.svg" />
+    <Content Include="WebWiki\site\fonts\kpn-metric-semi-bold.svg" />
+    <Content Include="WebWiki\site\fonts\kpn-service-icons.svg" />
+    <Content Include="WebWiki\site\fonts\kpn-ui-icons.svg" />
+    <Content Include="WebWiki\site\Frequently-Asked-Questions\index.html" />
+    <Content Include="WebWiki\site\Home\index.html" />
+    <Content Include="WebWiki\site\img\favicon.ico" />
+    <Content Include="WebWiki\site\img\git-icon-black.png" />
+    <Content Include="WebWiki\site\img\git.svg" />
+    <Content Include="WebWiki\site\img\logo-bitbucket.svg" />
+    <Content Include="WebWiki\site\img\logo-gitea.svg" />
+    <Content Include="WebWiki\site\img\logo-github.svg" />
+    <Content Include="WebWiki\site\img\logo-gitlab.svg" />
+    <Content Include="WebWiki\site\img\logo-kpn.png" />
+    <Content Include="WebWiki\site\img\logo-kpn.svg" />
+    <Content Include="WebWiki\site\img\ui-bulb.svg" />
+    <Content Include="WebWiki\site\index.html" />
+    <Content Include="WebWiki\site\js\detail.js" />
+    <Content Include="WebWiki\site\js\highlight.min.js" />
+    <Content Include="WebWiki\site\js\languages\asciidoc.min.js" />
+    <Content Include="WebWiki\site\js\languages\groovy.min.js" />
+    <Content Include="WebWiki\site\js\languages\nix.min.js" />
+    <Content Include="WebWiki\site\js\mermaid.min.js" />
+    <Content Include="WebWiki\site\js\theme.js" />
+    <Content Include="WebWiki\site\Loot-Profile-Group\index.html" />
+    <Content Include="WebWiki\site\Loot-Profiles\index.html" />
+    <Content Include="WebWiki\site\Loot\index.html" />
+    <Content Include="WebWiki\site\Manipulation-Groups\index.html" />
+    <Content Include="WebWiki\site\Manipulation\index.html" />
+    <Content Include="WebWiki\site\Mod-Difficulty-Chart\index.html" />
+    <Content Include="WebWiki\site\Mod-Republishing-and-Reuse\index.html" />
+    <Content Include="WebWiki\site\Page-Under-Construction\index.html" />
+    <Content Include="WebWiki\site\Player-Condition-Profile\index.html" />
+    <Content Include="WebWiki\site\Prefab-Data\index.html" />
+    <Content Include="WebWiki\site\Replenishment\index.html" />
+    <Content Include="WebWiki\site\Scripting-API\index.html" />
+    <Content Include="WebWiki\site\search.html" />
+    <Content Include="WebWiki\site\search\lunr.js" />
+    <Content Include="WebWiki\site\search\main.js" />
+    <Content Include="WebWiki\site\search\worker.js" />
+    <Content Include="WebWiki\site\sitemap.xml" />
+    <Content Include="WebWiki\site\Spawn-Conditions-Groups\index.html" />
+    <Content Include="WebWiki\site\Spawn-Conditions\index.html" />
+    <Content Include="WebWiki\site\SpawnGroup\index.html" />
+    <Content Include="WebWiki\site\Spawn\index.html" />
+    <Content Include="WebWiki\site\Support\index.html" />
+    <Content Include="WebWiki\site\Target\index.html" />
+    <Content Include="WebWiki\site\TextTemplate\index.html" />
+    <Content Include="WebWiki\site\Trigger-Group\index.html" />
+    <Content Include="WebWiki\site\Trigger\index.html" />
+    <Content Include="WebWiki\site\Troubleshooting-Tips\index.html" />
+    <Content Include="WebWiki\site\Troubleshooting\index.html" />
+    <Content Include="WebWiki\site\Tutorials\index.html" />
+    <Content Include="WebWiki\site\Wave-Spawners\index.html" />
+    <Content Include="WebWiki\site\Waypoint\index.html" />
+    <Content Include="WebWiki\site\Weapon-Mod-Rules\index.html" />
+    <Content Include="WebWiki\site\Weapons\index.html" />
+    <Content Include="WebWiki\site\Zone-Conditions-Profile\index.html" />
+    <Content Include="WebWiki\site\Zone-Profile\index.html" />
+    <Content Include="WebWiki\site\_Sidebar\index.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Audio\HostileJumpIn.xwm" />
+    <None Include="Audio\ShipyardConstruct.xwm" />
+    <None Include="Audio\ShipyardSell.xwm" />
+    <None Include="Data\Audio\MES-Audio.sbc" />
+    <None Include="Data\Blocks\Blueprints.sbc" />
+    <None Include="Data\Blocks\CubeBlocks_DisposableBeacons.sbc" />
+    <None Include="Data\Blocks\CubeBlocks_Economy.sbc" />
+    <None Include="Data\Blocks\CubeBlocks_HeavyOrComponentRich.sbc" />
+    <None Include="Data\Blocks\CubeBlocks_MedicalStation.sbc" />
+    <None Include="Data\Blocks\CubeBlocks_NPCEnergy.sbc" />
+    <None Include="Data\Blocks\CubeBlocks_NPCThrusters-Atmo.sbc" />
+    <None Include="Data\Blocks\CubeBlocks_NPCThrusters-Hydro.sbc" />
+    <None Include="Data\Blocks\CubeBlocks_NPCThrusters-Industrial.sbc" />
+    <None Include="Data\Blocks\CubeBlocks_NPCThrusters-Ion.sbc" />
+    <None Include="Data\Blocks\CubeBlocks_NPCThrusters-SciFi.sbc" />
+    <None Include="Data\Blocks\CubeBlocks_NPCThrusters-Warfare.sbc" />
+    <None Include="Data\Blocks\CubeBlocks_Remotes.sbc" />
+    <None Include="Data\Blocks\CubeBlocks_Suppressors.sbc" />
+    <None Include="Data\Blocks\CubeBlocks_Valuable.sbc" />
+    <None Include="Data\Blocks\desktop.ini" />
+    <None Include="Data\Blocks\EmissiveColors.sbc" />
+    <None Include="Data\Blocks\jTurpProgressionMod.sbc" />
+    <None Include="Data\Blocks\NpcInteriorTurret.sbc" />
+    <None Include="Data\Blocks\NpcTurretControlBlock.sbc" />
+    <None Include="Data\Contract\ContractType.sbc" />
+    <None Include="Data\Contract\IconWorkAround.sbc" />
+    <None Include="Data\EntityComponents\EntityComponents.sbc" />
+    <None Include="Data\EntityComponents\EntityContainers.sbc" />
+    <None Include="Data\Items\Anti-Inhibitors.sbc" />
+    <None Include="Data\Items\Components.sbc" />
+    <None Include="Data\Items\ItemCategories.sbc" />
+    <None Include="Data\Items\PhysicalItems.sbc" />
+    <None Include="Data\Items\Special-Items.sbc" />
+    <None Include="Data\Other\TargetingGroups.sbc" />
+    <None Include="Data\Prefabs\%28NPC-MES%29 Dummy Primary Prefab.sbc" />
+    <None Include="Data\Prefabs\%28NPC-MES%29 Dummy Primary Prefab.sbcB5" />
+    <None Include="Data\Prefabs\MES-Dummy-Prefabs.sbc" />
+    <None Include="Data\Prefabs\MES-Dummy-Prefabs.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\211\Symm-Corner211Base.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\211\Symm-Corner211Base.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\211\Symm-Corner211Tip.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\211\Symm-Corner211Tip.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\211\Symm-InvCorner211Base.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\211\Symm-InvCorner211Base.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\211\Symm-InvCorner211Tip.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\211\Symm-InvCorner211Tip.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\211\Symm-SlopeBase.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\211\Symm-SlopeBase.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\211\Symm-SlopeTip.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\211\Symm-SlopeTip.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Half\Symm-HalfCorner.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Half\Symm-HalfCorner.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Half\Symm-HalfCornerSlope.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Half\Symm-HalfCornerSlope.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Half\Symm-HalfSlope.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Half\Symm-HalfSlope.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Half\Symm-HalfSlopedCorner.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Half\Symm-HalfSlopedCorner.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Half\Symm-HalfSlopeInvCorner.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Half\Symm-HalfSlopeInvCorner.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Half\Symm-InvHalfSlope.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Half\Symm-InvHalfSlope.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Regular\Symm-Corner.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Regular\Symm-Corner.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Regular\Symm-CornerSquare.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Regular\Symm-CornerSquare.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Regular\Symm-InvCorner.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Regular\Symm-InvCorner.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Regular\Symm-Ramp.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Regular\Symm-Ramp.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Round\Symm-RoundCorner.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Round\Symm-RoundCorner.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Round\Symm-RoundInvCorner.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Round\Symm-RoundInvCorner.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Round\Symm-RoundSlope.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Armor\Round\Symm-RoundSlope.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\MES-Prefab-BlockOrientationReference.sbc" />
+    <None Include="Data\Prefabs\Symmetry\MES-Prefab-BlockOrientationReference.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\MES-Prefab-Symmetry-Armor.sbc" />
+    <None Include="Data\Prefabs\Symmetry\MES-Prefab-Symmetry-Armor.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Thruster\Symm-IonThruster.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Thruster\Symm-IonThruster.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Thruster\Symm-LargeIonThruster.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Thruster\Symm-LargeIonThruster.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Thruster\Symm-LargeSciFiIonThruster.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Thruster\Symm-LargeSciFiIonThruster.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Thruster\Symm-LargeWarfareIonThruster.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Thruster\Symm-LargeWarfareIonThruster.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Thruster\Symm-SciFiIonThruster.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Thruster\Symm-SciFiIonThruster.sbcB5" />
+    <None Include="Data\Prefabs\Symmetry\Thruster\Symm-WarfareIonThruster.sbc" />
+    <None Include="Data\Prefabs\Symmetry\Thruster\Symm-WarfareIonThruster.sbcB5" />
+    <None Include="Data\Prefabs\WcDebug\%28NPC-MES%29 WcHeliosTest.sbc" />
+    <None Include="Data\Prefabs\WcDebug\%28NPC-MES%29 WcHeliosTest.sbcB5" />
+    <None Include="Data\Prefabs\WcDebug\%28NPC-MES%29 WcM8HomingTest.sbc" />
+    <None Include="Data\Prefabs\WcDebug\%28NPC-MES%29 WcM8HomingTest.sbcB5" />
+    <None Include="Data\Prefabs\WcDebug\%28NPC-MES%29 WcRailgunTest.sbc" />
+    <None Include="Data\Prefabs\WcDebug\%28NPC-MES%29 WcRailgunTest.sbcB5" />
+    <None Include="Data\Prefabs\WcDebug\%28NPC-MES%29 WcSundererTest.sbc" />
+    <None Include="Data\Prefabs\WcDebug\%28NPC-MES%29 WcSundererTest.sbcB5" />
+    <None Include="Data\Profiles\Autopilot\CargoShip.sbc" />
+    <None Include="Data\Profiles\Autopilot\Escort.sbc" />
+    <None Include="Data\Profiles\Autopilot\Fighter.sbc" />
+    <None Include="Data\Profiles\Autopilot\HorseFighter.sbc" />
+    <None Include="Data\Profiles\Autopilot\Horsefly.sbc" />
+    <None Include="Data\Profiles\Autopilot\Hunter.sbc" />
+    <None Include="Data\Profiles\Autopilot\Nautical.sbc" />
+    <None Include="Data\Profiles\Autopilot\Passive.sbc" />
+    <None Include="Data\Profiles\Autopilot\Patrol.sbc" />
+    <None Include="Data\Profiles\Autopilot\Sniper.sbc" />
+    <None Include="Data\Profiles\Autopilot\Strike.sbc" />
+    <None Include="Data\Profiles\Behavior\DefaultCargoShip.sbc" />
+    <None Include="Data\Profiles\Behavior\DummyDespawnBehavior.sbc" />
+    <None Include="Data\Profiles\Behavior\GenericBehavior.sbc" />
+    <None Include="Data\Profiles\CreatureDummy.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-AdvancedAmmo.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-AdvancedComponents.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-AdvancedIngots.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-AdvancedOres.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-AdvancedTools.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-AntiInhibitor.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-BasicAmmo.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-BasicComponents.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-BasicIngots.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-BasicOres.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-BasicTools.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-Consumables.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-Corpses.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-Credits.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-Explosives.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-InhibitorChip.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-MixedAmmo.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-MixedComponents.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-MixedIngots.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-MixedOres.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-MixedTools.sbc" />
+    <None Include="Data\Profiles\Loot\ContainerTypes-Weapons.sbc" />
+    <None Include="Data\Profiles\Loot\Loot-AdvancedContainers.sbc" />
+    <None Include="Data\Profiles\Loot\Loot-AdvancedContainersLarge.sbc" />
+    <None Include="Data\Profiles\Loot\Loot-AntiInhibitor.sbc" />
+    <None Include="Data\Profiles\Loot\Loot-BasicContainers.sbc" />
+    <None Include="Data\Profiles\Loot\Loot-BasicContainersLarge.sbc" />
+    <None Include="Data\Profiles\Loot\Loot-Corpses.sbc" />
+    <None Include="Data\Profiles\Loot\Loot-Freight.sbc" />
+    <None Include="Data\Profiles\Loot\Loot-Lockers.sbc" />
+    <None Include="Data\Profiles\Loot\Loot-MixedContainers.sbc" />
+    <None Include="Data\Profiles\Loot\Loot-MixedContainersLarge.sbc" />
+    <None Include="Data\Profiles\Loot\Loot-WeaponRacks.sbc" />
+    <None Include="Data\Profiles\Manipulation\MES-Manipulation-RivalAi.sbc" />
+    <None Include="Data\Profiles\Manipulation\MES-ManipulationGroup-Difficulty.sbc" />
+    <None Include="Data\Profiles\Replacement\BlockReplacement-Armor.sbc" />
+    <None Include="Data\Profiles\Replacement\BlockReplacement-Energy.sbc" />
+    <None Include="Data\Profiles\Replacement\BlockReplacement-Proprietary.sbc" />
+    <None Include="Data\Profiles\Replacement\BlockReplacement-Thruster.sbc" />
+    <None Include="Data\Profiles\Replacement\BlockReplacement-Weapons.sbc" />
+    <None Include="Data\Profiles\Replenish\BaseReplenishRules.sbc" />
+    <None Include="Data\Profiles\Shipyard\ShipyardProfiles.sbc" />
+    <None Include="Data\Profiles\SpawnConditions\AllCargoShipA.sbc" />
+    <None Include="Data\Profiles\SpawnConditions\AllCargoShipB.sbc" />
+    <None Include="Data\Profiles\SpawnConditions\AtmoCargoShip.sbc" />
+    <None Include="Data\Profiles\SpawnConditions\Groups.sbc" />
+    <None Include="Data\Profiles\SpawnConditions\InstallationLarge.sbc" />
+    <None Include="Data\Profiles\SpawnConditions\InstallationMedium.sbc" />
+    <None Include="Data\Profiles\SpawnConditions\InstallationSmall.sbc" />
+    <None Include="Data\Profiles\SpawnConditions\RandomEncounterShip.sbc" />
+    <None Include="Data\Profiles\SpawnConditions\RandomEncounterStation.sbc" />
+    <None Include="Data\Profiles\SpawnConditions\SpaceCargoShip.sbc" />
+    <None Include="Data\Profiles\SpawnConditions\SpaceGravityCargoShip.sbc" />
+    <None Include="Data\Profiles\SpawnGroup\SpawnGroup-WcStaticDebug.sbc" />
+    <None Include="Data\Profiles\Store\MES-StoreProfile-Example.sbc" />
+    <None Include="Data\Profiles\SuitUpgrades\SuitUpgrades.sbc" />
+    <None Include="Data\Profiles\Targeting\GenericTargeting.sbc" />
+    <None Include="Data\Profiles\Trigger\DummyDespawn.sbc" />
+    <None Include="Data\Profiles\Trigger\NoTargetRetreatCheck.sbc" />
+    <None Include="Data\Profiles\Trigger\NoTargetRetreatInitialCheck.sbc" />
+    <None Include="Data\Profiles\Weapons\GenericWeapons.sbc" />
+    <None Include="Data\RivalAIProfile1.sbc" />
+    <None Include="Data\Scripts\ModularEncountersSystems\Behavior\desktop.ini" />
+    <None Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\AutoPilot\desktop.ini" />
+    <None Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\desktop.ini" />
+    <None Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Profiles\desktop.ini" />
+    <None Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Trigger\desktop.ini" />
+    <None Include="Data\Scripts\ModularEncountersSystems\Behavior\Subsystems\Weapons\desktop.ini" />
+    <None Include="Data\Scripts\ModularEncountersSystems\Entities\desktop.ini" />
+    <None Include="Data\Scripts\ModularEncountersSystems\Sync\desktop.ini" />
+    <None Include="Models\ML_Store\ML_Suit_Upgrade.mwm" />
+    <None Include="Models\ML_Store\ML_Suit_Upgrade_BS1.mwm" />
+    <None Include="Models\ML_Store\ML_Suit_Upgrade_BS2.mwm" />
+    <None Include="Models\ML_Store\ML_Suit_Upgrade_BS3.mwm" />
+    <None Include="Models\ML_Store\ML_Suit_Upgrade_LOD1.mwm" />
+    <None Include="Models\ML_Store\ML_Suit_Upgrade_LOD2.mwm" />
+    <None Include="Models\ML_Store\ML_Suit_Upgrade_LOD3.mwm" />
+    <None Include="modinfo.sbmi" />
+    <None Include="WebWiki\docs\Action.md" />
+    <None Include="WebWiki\docs\AdminConfig_AdminDebugOptions.md" />
+    <None Include="WebWiki\docs\AdminConfig_AiEnabled Bot Spawning.md" />
+    <None Include="WebWiki\docs\AdminConfig_Boss Encounters.md" />
+    <None Include="WebWiki\docs\AdminConfig_Clean-Up.md" />
+    <None Include="WebWiki\docs\AdminConfig_Combat.md" />
+    <None Include="WebWiki\docs\AdminConfig_Creatures.md" />
+    <None Include="WebWiki\docs\AdminConfig_General.md" />
+    <None Include="WebWiki\docs\AdminConfig_Grid.md" />
+    <None Include="WebWiki\docs\AdminConfig_Planetary Cargo Ships.md" />
+    <None Include="WebWiki\docs\AdminConfig_Planetary Installations.md" />
+    <None Include="WebWiki\docs\AdminConfig_Random Encounters.md" />
+    <None Include="WebWiki\docs\AdminConfig_Space Cargo Ships.md" />
+    <None Include="WebWiki\docs\AdminConfig_Spawn Filtering.md" />
+    <None Include="WebWiki\docs\AdminConfig_Timeout.md" />
+    <None Include="WebWiki\docs\AdminConfig_Wave Spawner.md" />
+    <None Include="WebWiki\docs\Autopilot.md" />
+    <None Include="WebWiki\docs\Bot-Spawn.md" />
+    <None Include="WebWiki\docs\Bugs,-Issues,-or-Crashes.md" />
+    <None Include="WebWiki\docs\Chat.md" />
+    <None Include="WebWiki\docs\Command.md" />
+    <None Include="WebWiki\docs\Condition.md" />
+    <None Include="WebWiki\docs\Core-Behavior.md" />
+    <None Include="WebWiki\docs\Custom-Event-Actions-and-ScenarioTools.md" />
+    <None Include="WebWiki\docs\Datapad.md" />
+    <None Include="WebWiki\docs\Dereliction.md" />
+    <None Include="WebWiki\docs\Economy-Stations-FAQ.md" />
+    <None Include="WebWiki\docs\Encounter-Attributes.md" />
+    <None Include="WebWiki\docs\Encounter-Guide.md" />
+    <None Include="WebWiki\docs\Event-Action.md" />
+    <None Include="WebWiki\docs\Event-Conditions.md" />
+    <None Include="WebWiki\docs\Event.md" />
+    <None Include="WebWiki\docs\Frequently-Asked-Questions.md" />
+    <None Include="WebWiki\docs\Home.md" />
+    <None Include="WebWiki\docs\index.md" />
+    <None Include="WebWiki\docs\Loot-Profile-Group.md" />
+    <None Include="WebWiki\docs\Loot-Profiles.md" />
+    <None Include="WebWiki\docs\Loot.md" />
+    <None Include="WebWiki\docs\Manipulation-Groups.md" />
+    <None Include="WebWiki\docs\Manipulation.md" />
+    <None Include="WebWiki\docs\Mod-Difficulty-Chart.md" />
+    <None Include="WebWiki\docs\Mod-Republishing-and-Reuse.md" />
+    <None Include="WebWiki\docs\Page-Under-Construction.md" />
+    <None Include="WebWiki\docs\Player-Condition-Profile.md" />
+    <None Include="WebWiki\docs\Prefab-Data.md" />
+    <None Include="WebWiki\docs\Replenishment.md" />
+    <None Include="WebWiki\docs\Scripting-API.md" />
+    <None Include="WebWiki\docs\Spawn-Conditions-Groups.md" />
+    <None Include="WebWiki\docs\Spawn-Conditions.md" />
+    <None Include="WebWiki\docs\Spawn.md" />
+    <None Include="WebWiki\docs\SpawnGroup.md" />
+    <None Include="WebWiki\docs\Support.md" />
+    <None Include="WebWiki\docs\Target.md" />
+    <None Include="WebWiki\docs\TextTemplate.md" />
+    <None Include="WebWiki\docs\Trigger-Group.md" />
+    <None Include="WebWiki\docs\Trigger.md" />
+    <None Include="WebWiki\docs\Troubleshooting-Tips.md" />
+    <None Include="WebWiki\docs\Troubleshooting.md" />
+    <None Include="WebWiki\docs\Tutorials.md" />
+    <None Include="WebWiki\docs\Wave-Spawners.md" />
+    <None Include="WebWiki\docs\Waypoint.md" />
+    <None Include="WebWiki\docs\Weapon-Mod-Rules.md" />
+    <None Include="WebWiki\docs\Weapons.md" />
+    <None Include="WebWiki\docs\Zone-Conditions-Profile.md" />
+    <None Include="WebWiki\docs\Zone-Profile.md" />
+    <None Include="WebWiki\docs\_Sidebar.md" />
+    <None Include="WebWiki\mkdocs.yml" />
+    <None Include="WebWiki\site\css\fonts\kpn-metric-bold.eot" />
+    <None Include="WebWiki\site\css\fonts\kpn-metric-bold.ttf" />
+    <None Include="WebWiki\site\css\fonts\kpn-metric-bold.woff" />
+    <None Include="WebWiki\site\css\fonts\kpn-metric-light.eot" />
+    <None Include="WebWiki\site\css\fonts\kpn-metric-light.ttf" />
+    <None Include="WebWiki\site\css\fonts\kpn-metric-light.woff" />
+    <None Include="WebWiki\site\css\fonts\kpn-metric-normal.eot" />
+    <None Include="WebWiki\site\css\fonts\kpn-metric-normal.ttf" />
+    <None Include="WebWiki\site\css\fonts\kpn-metric-normal.woff" />
+    <None Include="WebWiki\site\css\fonts\kpn-metric-semi-bold.eot" />
+    <None Include="WebWiki\site\css\fonts\kpn-metric-semi-bold.ttf" />
+    <None Include="WebWiki\site\css\fonts\kpn-metric-semi-bold.woff" />
+    <None Include="WebWiki\site\css\fonts\kpn-service-icons.eot" />
+    <None Include="WebWiki\site\css\fonts\kpn-service-icons.ttf" />
+    <None Include="WebWiki\site\css\fonts\kpn-service-icons.woff" />
+    <None Include="WebWiki\site\css\fonts\kpn-ui-icons.eot" />
+    <None Include="WebWiki\site\css\fonts\kpn-ui-icons.ttf" />
+    <None Include="WebWiki\site\css\fonts\kpn-ui-icons.woff" />
+    <None Include="WebWiki\site\fonts\kpn-metric-bold.eot" />
+    <None Include="WebWiki\site\fonts\kpn-metric-bold.ttf" />
+    <None Include="WebWiki\site\fonts\kpn-metric-bold.woff" />
+    <None Include="WebWiki\site\fonts\kpn-metric-light.eot" />
+    <None Include="WebWiki\site\fonts\kpn-metric-light.ttf" />
+    <None Include="WebWiki\site\fonts\kpn-metric-light.woff" />
+    <None Include="WebWiki\site\fonts\kpn-metric-normal.eot" />
+    <None Include="WebWiki\site\fonts\kpn-metric-normal.ttf" />
+    <None Include="WebWiki\site\fonts\kpn-metric-normal.woff" />
+    <None Include="WebWiki\site\fonts\kpn-metric-semi-bold.eot" />
+    <None Include="WebWiki\site\fonts\kpn-metric-semi-bold.ttf" />
+    <None Include="WebWiki\site\fonts\kpn-metric-semi-bold.woff" />
+    <None Include="WebWiki\site\fonts\kpn-service-icons.eot" />
+    <None Include="WebWiki\site\fonts\kpn-service-icons.ttf" />
+    <None Include="WebWiki\site\fonts\kpn-service-icons.woff" />
+    <None Include="WebWiki\site\fonts\kpn-ui-icons.eot" />
+    <None Include="WebWiki\site\fonts\kpn-ui-icons.ttf" />
+    <None Include="WebWiki\site\fonts\kpn-ui-icons.woff" />
+    <None Include="WebWiki\site\search\search_index.json" />
+    <None Include="WebWiki\site\sitemap.xml.gz" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mod\Models\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>

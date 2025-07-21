@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<ThreatSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <BlockThreats>
+    <BlockType Threat="100" Multiplier="1" PotentialVolume="1.1">LargeGatlingTurret</BlockType>
+    <BlockType Threat="150" Multiplier="1" PotentialVolume="1.1">LargeMissileTurret</BlockType>
+    <BlockType Threat="200" Multiplier="1" PotentialVolume="1">LargeRailgun</BlockType>
+    <BlockType Threat="80" Multiplier="1" PotentialVolume="1">LargeInteriorTurret</BlockType>
+    <BlockType Threat="50" Multiplier="1" PotentialVolume="1">SmallGatlingTurret</BlockType>
+  </BlockThreats>
+  <CategoryThreat>
+    <Category Threat="120" Multiplier="1" PotentialVolume="1">Antennas</Category>
+    <Category Threat="120" Multiplier="1" PotentialVolume="1">Beacons</Category>
+    <Category Threat="120" Multiplier="1" PotentialVolume="1">Production</Category>
+  </CategoryThreat>
+  <SizeMultipliers>
+    <SmallGridMultiplier>0.5</SmallGridMultiplier>
+    <LargeGridMultiplier>1</LargeGridMultiplier>
+    <StationMultiplier>1.25</StationMultiplier>
+  </SizeMultipliers>
+  <PowerMultipliers>
+    <SmallGridMultiplier>0.5</SmallGridMultiplier>
+    <LargeGridMultiplier>1</LargeGridMultiplier>
+    <StationMultiplier>1.25</StationMultiplier>
+  </PowerMultipliers>
+  <UsePowerMultipliers>true</UsePowerMultipliers>
+  <UseSizeMultipliers>true</UseSizeMultipliers>
+  <ModVersion>2.71.29</ModVersion>
+</ThreatSettings>

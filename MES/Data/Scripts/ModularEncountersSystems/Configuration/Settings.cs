@@ -26,7 +26,8 @@ namespace ModularEncountersSystems.Configuration {
 		public static ConfigCreatures Creatures = new ConfigCreatures();
 		public static ConfigProgression Progression = new ConfigProgression();
 		public static ConfigCombat Combat = new ConfigCombat();
-		public static SavedInternalData SavedData = null;
+        public static ConfigThreat Threat = new ConfigThreat();
+        public static SavedInternalData SavedData = null;
 
 		public static void InitSettings(string phase) {
 
@@ -47,7 +48,7 @@ namespace ModularEncountersSystems.Configuration {
 			if(!General.ConfigLoaded)
 				General = General.LoadSettings(phase);
 
-			if (!Grids.ConfigLoaded)
+            if (!Grids.ConfigLoaded)
 				Grids = Grids.LoadSettings(phase);
 
 			if (!SpaceCargoShips.ConfigLoaded)
@@ -80,7 +81,10 @@ namespace ModularEncountersSystems.Configuration {
 			if (!Combat.ConfigLoaded)
 				Combat = Combat.LoadSettings(phase);
 
-			if (MyAPIGateway.Multiplayer.IsServer && SavedData == null && phase == "BeforeStart")
+            if (!Threat.ConfigLoaded)
+                Threat = Threat.LoadSettings(phase);
+
+            if (MyAPIGateway.Multiplayer.IsServer && SavedData == null && phase == "BeforeStart")
 				SavedData = SavedInternalData.LoadSettings(phase);
 
 			CheckGlobalEvents();
@@ -446,6 +450,7 @@ namespace ModularEncountersSystems.Configuration {
 
 			try {
 
+				Threat.SaveSettings();
 				BossEncounters.SaveSettings();
 				Combat.SaveSettings();
 				Creatures.SaveSettings();

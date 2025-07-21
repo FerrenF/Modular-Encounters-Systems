@@ -1,4 +1,6 @@
-﻿using ModularEncountersSystems.API;
+﻿
+using ModularEncountersSystems.API;
+using ModularEncountersSystems.Configuration;
 using ModularEncountersSystems.Helpers;
 using ModularEncountersSystems.Logging;
 using Sandbox.Definitions;
@@ -678,34 +680,44 @@ namespace ModularEncountersSystems.Entities {
 		public static float GridTargetValue(GridEntity grid) {
 
 			var timespan = MyAPIGateway.Session.GameDateTime - grid.LastThreatCalculationTime;
+            ConfigThreat currentThreatSettings = Settings.Threat;
+           
+            float result = 0;
 
-			if (timespan.TotalMilliseconds < 5000)
-				return grid.ThreatScore;
+            if (timespan.TotalMilliseconds < 5000)
+                return grid.ThreatScore;
 
-			float result = 0;
-
-			if (grid.IsClosed() || grid.AllBlocks.Count <= 1)
+            if (grid.IsClosed() || grid.AllBlocks.Count <= 1)
+			{
 				return result;
+			}
 
-			result += GetTargetValueFromBlockList(grid.Antennas, 4, 2);
-			result += GetTargetValueFromBlockList(grid.Beacons, 3, 2);
-			result += GetTargetValueFromBlockList(grid.Containers, 0.5f, 2, true);
-			result += GetTargetValueFromBlockList(grid.Controllers, 0.5f, 2);
-			result += GetTargetValueFromBlockList(grid.Gravity, 2, 4, true);
-			result += GetTargetValueFromBlockList(grid.Guns, 5, 4, true);
-			result += GetTargetValueFromBlockList(grid.JumpDrives, 10, 2);
-			result += GetTargetValueFromBlockList(grid.Mechanical, 1, 2);
-			result += GetTargetValueFromBlockList(grid.Medical, 10, 2);
-			result += GetTargetValueFromBlockList(grid.NanoBots, 15, 2);
-			result += GetTargetValueFromBlockList(grid.Production, 2, 2, true);
-			result += GetTargetValueFromBlockList(grid.Power, 0.5f, 2, true);
-			result += GetTargetValueFromBlockList(grid.Shields, 15, 2);
-			result += GetTargetValueFromBlockList(grid.Thrusters, 1, 2);
-			result += GetTargetValueFromBlockList(grid.Tools, 2, 2, true);
-			result += GetTargetValueFromBlockList(grid.Turrets, 7.5f, 4, true);
+            result += GetTargetValueFromBlockList(grid.Antennas, "Antennas");
+            result += GetTargetValueFromBlockList(grid.Beacons, "Beacons");
+            result += GetTargetValueFromBlockList(grid.Containers, "Containers", true);
+            result += GetTargetValueFromBlockList(grid.Controllers, "Controllers");
+            result += GetTargetValueFromBlockList(grid.Gravity, "Gravity", true);
+            result += GetTargetValueFromBlockList(grid.Guns, "Guns", true);
+            result += GetTargetValueFromBlockList(grid.JumpDrives, "JumpDrives");
+            result += GetTargetValueFromBlockList(grid.Mechanical, "Mechanical");
+            result += GetTargetValueFromBlockList(grid.Medical, "Medical");
+            result += GetTargetValueFromBlockList(grid.NanoBots, "NanoBots");
+            result += GetTargetValueFromBlockList(grid.Production, "Production", true);
+            result += GetTargetValueFromBlockList(grid.Power, "Power", true);
+            result += GetTargetValueFromBlockList(grid.Shields, "Shields");
+            result += GetTargetValueFromBlockList(grid.Thrusters, "Thrusters");
+            result += GetTargetValueFromBlockList(grid.Tools, "Tools", true);
+            result += GetTargetValueFromBlockList(grid.Turrets, "Turrets", true);
 
-			//Factor Power
-			result += (grid.PowerOutput().Y > 0) ? (grid.PowerOutput().Y / 10) : 0;
+
+
+            /*
+			 * 
+			 * OLD NEWS
+			 * 
+			 * 
+            //Factor Power
+            result += (grid.PowerOutput().Y > 0) ? (grid.PowerOutput().Y / 10) : 0;
 
 			//Factor Total Block Count
 			result += grid.AllBlocks.Count / 100;
@@ -725,12 +737,44 @@ namespace ModularEncountersSystems.Entities {
 
 			grid.ThreatScore = result * 0.70f;
 			grid.LastThreatCalculationTime = MyAPIGateway.Session.GameDateTime;
+			*/
 
-			return grid.ThreatScore;
-		
-		}
+            result += grid.AllBlocks.Count / 100f;
+            result += (float)Vector3D.Distance(grid.CubeGrid.WorldAABB.Min, grid.CubeGrid.WorldAABB.Max) / 4f;
 
-		public static int GridPcuValue(List<GridEntity> gridList) {
+            if (currentThreatSettings.UseSizeMultipliers)
+            {
+                if (grid.CubeGrid.GridSizeEnum == MyCubeSize.Large)
+                    result *= (float)currentThreatSettings.SizeMultipliers.LargeGridMultiplier;
+                else
+                    result *= (float)currentThreatSettings.SizeMultipliers.SmallGridMultiplier;
+
+                if (grid.CubeGrid.IsStatic)
+                    result *= (float)currentThreatSettings.SizeMultipliers.StationMultiplier;
+            }
+
+            if (currentThreatSettings.UsePowerMultipliers && grid.PowerOutput().Y > 0)
+            {
+                if (grid.CubeGrid.GridSizeEnum == MyCubeSize.Large)
+                    result += grid.PowerOutput().Y * (float)currentThreatSettings.PowerMultipliers.LargeGridMultiplier;
+                else
+                    result += grid.PowerOutput().Y * (float)currentThreatSettings.PowerMultipliers.SmallGridMultiplier;
+
+                if (grid.CubeGrid.IsStatic)
+                    result += grid.PowerOutput().Y * (float)currentThreatSettings.PowerMultipliers.StationMultiplier;
+
+            }
+
+            grid.ThreatScore = result * 0.70f;
+            grid.LastThreatCalculationTime = MyAPIGateway.Session.GameDateTime;         
+
+
+            return grid.ThreatScore;
+
+
+        }
+
+        public static int GridPcuValue(List<GridEntity> gridList) {
 
 			int result = 0;
 
@@ -774,37 +818,50 @@ namespace ModularEncountersSystems.Entities {
 
 		}
 
-		public static float GetTargetValueFromBlockList(List<BlockEntity> blockList, float threatValue, float modMultiplier = 2, bool scanInventory = false) {
+        public static float GetTargetValueFromBlockList(List<BlockEntity> blockList, string categoryName, bool scanInventory = false)
+        {
+            ConfigThreat currentThreatSettings = Settings.Threat;
 
-			float result = 0;
+            float result = 0;
+			ThreatDefinition categoryThreatDef = null;
+			            // Try to get category threat once
+            currentThreatSettings.CategoryThreatDefinitions.TryGetValue(categoryName, out categoryThreatDef);
 
-			foreach (var block in blockList) {
+            foreach (var block in blockList)
+            {
+                if (block.IsClosed() || !block.Functional)
+                    continue;
 
-				if (block.IsClosed() || !block.Functional)
-					continue;
+                // Try block-specific threat first
+                ThreatDefinition threatDef = null;
+                if (!currentThreatSettings.BlockThreatDefinitions.TryGetValue(block.Block.BlockDefinition.SubtypeId, out threatDef))
+                {
+                    // Fall back to category-level threat
+                    threatDef = categoryThreatDef;
+                }
 
-				var value = threatValue * (block.Modded ? modMultiplier : 1);
+                if (threatDef == null)
+                {
+                    // No valid threat definition, skip this block
+                    continue;
+                }
 
-				if (scanInventory) {
+                if (block.IsClosed() || !block.Functional)
+                    continue;
 
-					if (block.Block.HasInventory && block.Block.GetInventory().MaxVolume > 0) {
+                float value = (float)(threatDef.Threat * threatDef.Multiplier);
 
-						var inventoryModifier = ((float)block.Block.GetInventory().CurrentVolume / (float)block.Block.GetInventory().MaxVolume) + 1;
+                if (scanInventory && block.Block.HasInventory && block.Block.GetInventory().MaxVolume > 0)
+                {
+                    float invMod = ((float)block.Block.GetInventory().CurrentVolume / (float)block.Block.GetInventory().MaxVolume) + 1;
+                    if (!float.IsNaN(invMod))
+                        value *= (float)(invMod * threatDef.PotentialVolume);
+                }
 
-						if (inventoryModifier != float.NaN)
-							value *= inventoryModifier;
-
-					}
-
-				}
-
-				result += value;
-
-			}
-
-			return result;
-
-		}
+                result += value;
+            }
+            return result;
+        }
 
 		public static int GridMovementScore(List<GridEntity> grids) {
 

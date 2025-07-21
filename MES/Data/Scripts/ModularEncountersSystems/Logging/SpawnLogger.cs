@@ -36,6 +36,7 @@ namespace ModularEncountersSystems.Logging {
 		PostSpawn = 1 << 13,
 		Dev = 1 << 14,
 		SpawnRecord = 1 << 15,
+		Threat = 1 << 16
 
 	}
 
@@ -60,8 +61,9 @@ namespace ModularEncountersSystems.Logging {
 		public static StringBuilder SpawnRecord = new StringBuilder();
 		public static StringBuilder Startup = new StringBuilder();
 		public static StringBuilder Zone = new StringBuilder();
+        public static StringBuilder Threat = new StringBuilder();
 
-		public static List<LoggerQueue> QueuedItems = new List<LoggerQueue>();
+        public static List<LoggerQueue> QueuedItems = new List<LoggerQueue>();
 		public static Dictionary<string, int> Reason = null;
 
 		//Behavior Debugs
@@ -200,7 +202,10 @@ namespace ModularEncountersSystems.Logging {
 			if (type == SpawnerDebugEnum.Zone)
 				WriteToBuilder(msg, type, Zone, forceGameLog);
 
-		}
+            if (type == SpawnerDebugEnum.Threat)
+                WriteToBuilder(msg, type, Threat, forceGameLog);
+
+        }
 
 		public static void WriteToBuilder(string msg, SpawnerDebugEnum type, StringBuilder sb, bool forceGameLog) {
 

@@ -361,3 +361,15 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+
+./ModSDK/*
+ModSDK/*
+.vs/*
+./.vs/*
+.cr/*
+./.cr/*
+./obj/*
+obj/*
+./bin/*
+bin/*
