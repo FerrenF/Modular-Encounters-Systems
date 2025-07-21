@@ -582,7 +582,7 @@
     <Compile Include="Data\Scripts\ModularEncountersSystems\Zones\ZoneManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config-Threat.xml" />
+    <Content Include="Config-Threat_example.xml" />
     <Content Include="Data\StoreItems\MES-StoreItems-Example.xml" />
     <Content Include="Data\TextTemplates\MES-TextTemplate-Example.xml" />
     <Content Include="metadata.mod" />
@@ -1010,5 +1010,4 @@
     <Target Name="AfterBuild">
     </Target>
     -->
-
 </Project>

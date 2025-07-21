@@ -397,7 +397,7 @@ namespace ModularEncountersSystems.Entities {
 			//Try Player
 			var character = entity as IMyCharacter;
 			var block = entity as IMyCubeBlock;
-
+			
 			if (character != null) {
 
 				return GetTargetFromPlayerEntity(character);
@@ -799,15 +799,17 @@ namespace ModularEncountersSystems.Entities {
 
 		}
 
-        public static float GetTargetValueFromBlockList(List<BlockEntity> blockList, string categoryName, bool scanInventory = false)
+        /*public static float GetTargetValueFromBlockList(List<BlockEntity> blockList, string categoryName, bool scanInventory = false)
         {
+            Dictionary<string, float> specificBlockThreatResults = new Dictionary<string, float>();
             ConfigThreat currentThreatSettings = Settings.Threat;
 
-            float result = 0;
+            float categoryThreatResult = 0;
 			ThreatDefinition categoryThreatDef = null;
-			
-			// Try to get category threat once dontalue(categoryName, out categoryThreatDef);
 
+            // Try to get category threat once dont
+            currentThreatSettings.CategoryThreatDefinitions.TryGetValue(categoryName, out categoryThreatDef);
+			
             foreach (var block in blockList)
             {
                 if (block.IsClosed() || !block.Functional)
@@ -845,13 +847,105 @@ namespace ModularEncountersSystems.Entities {
                         value *= (float)(invMod * threatDef.PotentialVolume);
                 }
 
-                result += value;
-                result *= (float)threatDef.Multiplier; // oof penalties now, have fun 
+                categoryThreatResult += value;
             }
-            return result;
+            return categoryThreatResult;
+        }*/
+
+        public static float GetTargetValueFromBlockList(List<BlockEntity> blockList, string categoryName, bool scanInventory = false)
+        {
+            // Track specific blocks
+            // Block-specific raw threats by block type
+            Dictionary<string, List<float>> blockSpecificThreats = new Dictionary<string, List<float>>();
+
+            ConfigThreat currentThreatSettings = Settings.Threat;
+
+            float categoryThreatResult = 0f;
+            ThreatDefinition categoryThreatDef = null;
+
+            currentThreatSettings.CategoryThreatDefinitions.TryGetValue(categoryName, out categoryThreatDef);
+
+            // Track category-level blocks
+            List<float> categoryBlockThreats = new List<float>();
+
+            foreach (var block in blockList)
+            {
+                if (block.IsClosed() || !block.Functional)
+                    continue;
+
+                string blockType = String.IsNullOrEmpty(block.Block.BlockDefinition.SubtypeId)
+             ? block.Block.BlockDefinition.TypeIdString
+             : block.Block.BlockDefinition.SubtypeId;
+
+                // Try block-specific first
+                ThreatDefinition threatDef = null;
+                bool isBlockSpecific = currentThreatSettings.BlockThreatDefinitions.TryGetValue(blockType, out threatDef);
+
+                if (!isBlockSpecific)
+                {
+                    threatDef = categoryThreatDef;
+                }
+
+                if (threatDef == null)
+                    continue;
+
+                // we didn't find ANY threat
+                if (threatDef == null)
+                    continue;
+
+                float value = (float)threatDef.Threat;
+
+                if (scanInventory && block.Block.HasInventory && block.Block.GetInventory().MaxVolume > 0)
+                {
+                    float invMod = ((float)block.Block.GetInventory().CurrentVolume / (float)block.Block.GetInventory().MaxVolume) + 1;
+                    if (!float.IsNaN(invMod))
+                    {
+                        value += (float)(invMod * threatDef.PotentialVolume);
+                    }
+                }
+
+                if (isBlockSpecific)
+                {
+                   
+                    if (!specificBlockThreatResults.ContainsKey(blockType))
+                        specificBlockThreatResults[blockType] = 0;
+
+                    // Apply penalty logic for block-specific modifiers
+                    float lastThreat = specificBlockThreatResults[blockType];
+                    float nextThreat = (lastThreat + value) * (float)threatDef.Multiplier;
+                    specificBlockThreatResults[blockType] = nextThreat;
+                }
+                else
+                {
+                    // Store it for future penalties
+                    categoryBlockThreats.Add(value);
+                }
+            }
+
+            // Apply the same progressive penalty for category-level blocks that are not defined specifically
+            if (categoryThreatDef != null && categoryBlockThreats.Count > 0)
+            {
+                float multiplier = (float)categoryThreatDef.Multiplier;
+                float compoundedThreat = 0f;
+
+                foreach (float threat in categoryBlockThreats)
+                {
+                    compoundedThreat = (compoundedThreat + threat) * multiplier;
+                }
+
+                categoryThreatResult += compoundedThreat;
+            }
+
+            // Add both category-based threat and block-specific threat together and return it
+            foreach (var kvp in specificBlockThreatResults)
+            {
+                categoryThreatResult += kvp.Value;
+            }
+
+            return categoryThreatResult;
         }
 
-		public static int GridMovementScore(List<GridEntity> grids) {
+        public static int GridMovementScore(List<GridEntity> grids) {
 
 			int result = 0;
 
