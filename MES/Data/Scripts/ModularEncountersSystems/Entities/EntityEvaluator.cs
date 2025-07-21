@@ -710,14 +710,14 @@ namespace ModularEncountersSystems.Entities {
             result += GetTargetValueFromBlockList(grid.Turrets, "Turrets", true);
 
 
-			// Add thread based on the number of blocks.
-            result += (float)(grid.AllBlocks.Count 
-				* (currentThreatSettings.UseThreatPerBlockMultiplier ? currentThreatSettings.ThreatPerBlockMultiplier : 0.0F));
+			// Add threat based on the number of blocks.
+            result += ((float)(grid.AllBlocks.Count 
+				* (currentThreatSettings.UseThreatPerBlockMultiplier ? currentThreatSettings.ThreatPerBlockMultiplier : 0.0F)));
 
 
 			// Add threat based on the size of the bounding box of the grid. (Original)
-            result += (float)(Vector3D.Distance(grid.CubeGrid.WorldAABB.Min, grid.CubeGrid.WorldAABB.Max)
-				* (currentThreatSettings.UseGridBoundingBoxThreatMultiplier ? currentThreatSettings.BoundingBoxSizeMultiplier : 0.0F));
+            result += ((float)(Vector3D.Distance(grid.CubeGrid.WorldAABB.Min, grid.CubeGrid.WorldAABB.Max)
+				* (currentThreatSettings.UseGridBoundingBoxThreatMultiplier ? currentThreatSettings.BoundingBoxSizeMultiplier : 0.0F)));
 
 
 			// Multiply threat based on the type of grid we are evaluating
@@ -736,17 +736,16 @@ namespace ModularEncountersSystems.Entities {
             if (currentThreatSettings.UsePowerMultipliers && grid.PowerOutput().Y > 0)
             {
                 if (grid.CubeGrid.GridSizeEnum == MyCubeSize.Large)
-                    result += grid.PowerOutput().Y * (float)currentThreatSettings.PowerMultipliers.LargeGridMultiplier;
+                    result += (grid.PowerOutput().Y * (float)currentThreatSettings.PowerMultipliers.LargeGridMultiplier);
                 else
-                    result += grid.PowerOutput().Y * (float)currentThreatSettings.PowerMultipliers.SmallGridMultiplier;
+                    result += (grid.PowerOutput().Y * (float)currentThreatSettings.PowerMultipliers.SmallGridMultiplier);
 
                 if (grid.CubeGrid.IsStatic)
-                    result += grid.PowerOutput().Y * (float)currentThreatSettings.PowerMultipliers.StationMultiplier;
+                    result += (grid.PowerOutput().Y * (float)currentThreatSettings.PowerMultipliers.StationMultiplier);
 
             }
 
-			// This was in the original code. It's no longer necessary.
-            //grid.ThreatScore = result * 0.70f;
+            grid.ThreatScore = result;
 
             grid.LastThreatCalculationTime = MyAPIGateway.Session.GameDateTime;         
 
@@ -831,7 +830,7 @@ namespace ModularEncountersSystems.Entities {
                 if (block.IsClosed() || !block.Functional)
                     continue;
 
-                float value = (float)(threatDef.Threat * threatDef.Multiplier);
+                float value = (float)(threatDef.Threat);
 
 				//we are going to be nice and use the essentially useless scanInventory variable. i mean, i guess it does save a few cycles not having to check all the other shit. ehh. fair.
                 if (scanInventory && block.Block.HasInventory && block.Block.GetInventory().MaxVolume > 0)
@@ -847,6 +846,7 @@ namespace ModularEncountersSystems.Entities {
                 }
 
                 result += value;
+                result *= (float)threatDef.Multiplier; // oof penalties now, have fun 
             }
             return result;
         }
