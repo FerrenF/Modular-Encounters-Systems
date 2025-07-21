@@ -731,7 +731,7 @@ namespace ModularEncountersSystems.Entities {
                 if (grid.CubeGrid.IsStatic)
                     result *= (float)currentThreatSettings.SizeMultipliers.StationMultiplier;
             }
-
+			
 			// Add threat based on the amount of power being produced, modified by the type of grid producing power.
             if (currentThreatSettings.UsePowerMultipliers && grid.PowerOutput().Y > 0)
             {
@@ -799,150 +799,129 @@ namespace ModularEncountersSystems.Entities {
 
 		}
 
-        /*public static float GetTargetValueFromBlockList(List<BlockEntity> blockList, string categoryName, bool scanInventory = false)
-        {
-            Dictionary<string, float> specificBlockThreatResults = new Dictionary<string, float>();
-            ConfigThreat currentThreatSettings = Settings.Threat;
-
-            float categoryThreatResult = 0;
-			ThreatDefinition categoryThreatDef = null;
-
-            // Try to get category threat once dont
-            currentThreatSettings.CategoryThreatDefinitions.TryGetValue(categoryName, out categoryThreatDef);
-			
-            foreach (var block in blockList)
-            {
-                if (block.IsClosed() || !block.Functional)
-                    continue;
-
-                // Try block-specific (block type) threat first
-                ThreatDefinition threatDef = null;
-                if (!currentThreatSettings.BlockThreatDefinitions.TryGetValue(block.Block.BlockDefinition.TypeIdString, out threatDef))
-                {
-                    // Fall back to category-level threat if we dont find anything more granular
-                    threatDef = categoryThreatDef;
-                }
-
-                if (threatDef == null)
-                {
-                    // No valid threat definition at all, skip this block
-                    continue;
-                }
-
-                if (block.IsClosed() || !block.Functional)
-                    continue;
-
-                float value = (float)(threatDef.Threat);
-
-				//we are going to be nice and use the essentially useless scanInventory variable. i mean, i guess it does save a few cycles not having to check all the other shit. ehh. fair.
-                if (scanInventory && block.Block.HasInventory && block.Block.GetInventory().MaxVolume > 0)
-                {
-					// this is a ratio of the block's current volume to the block's max volume, or "full-ness" perhaps.
-                    float invMod = ((float)block.Block.GetInventory().CurrentVolume / (float)block.Block.GetInventory().MaxVolume) + 1;
-
-
-                    if (!float.IsNaN(invMod))
-
-						// Multiply the full-ness by the PotentialVolume threat modifier.
-                        value *= (float)(invMod * threatDef.PotentialVolume);
-                }
-
-                categoryThreatResult += value;
-            }
-            return categoryThreatResult;
-        }*/
-
         public static float GetTargetValueFromBlockList(List<BlockEntity> blockList, string categoryName, bool scanInventory = false)
         {
-            // Track specific blocks
-            // Block-specific raw threats by block type
-            Dictionary<string, List<float>> blockSpecificThreats = new Dictionary<string, List<float>>();
 
+			float totalThreatResult = 0F;
+
+			// Current Threat Config
             ConfigThreat currentThreatSettings = Settings.Threat;
 
-            float categoryThreatResult = 0f;
+            // Used to track specific blocks within the block's 'category' assigned by MES            
+            Dictionary<string, List<float>> blockSpecificThreats = new Dictionary<string, List<float>>();
+
+            // Tally for the threat limited to non-specific 'category' based blocks
+            List<float> categoryThreats = new List<float>();
+
             ThreatDefinition categoryThreatDef = null;
 
+			// Try to get a value for the category from the current threat definitions
             currentThreatSettings.CategoryThreatDefinitions.TryGetValue(categoryName, out categoryThreatDef);
 
-            // Track category-level blocks
-            List<float> categoryBlockThreats = new List<float>();
 
             foreach (var block in blockList)
             {
+
+				// We don't count non-functional blocks here. They DO contribute to threat insofar as overall block count.
                 if (block.IsClosed() || !block.Functional)
                     continue;
 
+				// First, try and get the block's subtype ID. If it doesn't have one, then use the blocks main type ID.
                 string blockType = String.IsNullOrEmpty(block.Block.BlockDefinition.SubtypeId)
              ? block.Block.BlockDefinition.TypeIdString
              : block.Block.BlockDefinition.SubtypeId;
 
-                // Try block-specific first
                 ThreatDefinition threatDef = null;
+
+                // Before we consider category threat, let's try and get a more granular definition if it exists. Also, use it to set a flag for later.
                 bool isBlockSpecific = currentThreatSettings.BlockThreatDefinitions.TryGetValue(blockType, out threatDef);
 
-                if (!isBlockSpecific)
-                {
+                if (!isBlockSpecific)        
                     threatDef = categoryThreatDef;
-                }
-
+                
+                // we didn't find ANY threat. Don't continue calculation.
                 if (threatDef == null)
                     continue;
 
-                // we didn't find ANY threat
-                if (threatDef == null)
-                    continue;
 
                 float value = (float)threatDef.Threat;
-
-                if (scanInventory && block.Block.HasInventory && block.Block.GetInventory().MaxVolume > 0)
+                if (scanInventory 
+					&& block.Block.HasInventory 
+					&& block.Block.GetInventory().MaxVolume > 0)
                 {
+					// This value will range from 0ish-1.0, representing how filled the container is in percentage.
+					// 0.54 = 54% full. 
+
                     float invMod = ((float)block.Block.GetInventory().CurrentVolume / (float)block.Block.GetInventory().MaxVolume) + 1;
                     if (!float.IsNaN(invMod))
                     {
+						// We add an amount of threat based on how full the container is times the potential volume modifier
                         value += (float)(invMod * threatDef.PotentialVolume);
                     }
                 }
 
-                if (isBlockSpecific)
+				// Finally. If the threat is calculated based on a specific block type, then it goes into the dictionary.
+				// If not, then we are safe to add it to the category score
+                
+				if (isBlockSpecific)
                 {
-                   
-                    if (!specificBlockThreatResults.ContainsKey(blockType))
-                        specificBlockThreatResults[blockType] = 0;
 
-                    // Apply penalty logic for block-specific modifiers
-                    float lastThreat = specificBlockThreatResults[blockType];
-                    float nextThreat = (lastThreat + value) * (float)threatDef.Multiplier;
-                    specificBlockThreatResults[blockType] = nextThreat;
+					if (!blockSpecificThreats.ContainsKey(blockType)){
+						// Initialize a new list if it doesn't exist
+						blockSpecificThreats[blockType] = new List<float>();
+					}
+                    // And add the value for tallying later.
+                    blockSpecificThreats[blockType].Add(value);
                 }
                 else
                 {
-                    // Store it for future penalties
-                    categoryBlockThreats.Add(value);
+					// Add the category threat to the list of threat values.
+					categoryThreats.Add(value);
                 }
             }
 
-            // Apply the same progressive penalty for category-level blocks that are not defined specifically
-            if (categoryThreatDef != null && categoryBlockThreats.Count > 0)
+			// Now, we tally things up and apply penalties.
+
+            // Apply a progressive penalty for category-level blocks
+            if (categoryThreatDef != null 
+				&& categoryThreats.Count > 0)
             {
+				// Our penalty multiplier.
                 float multiplier = (float)categoryThreatDef.Multiplier;
-                float compoundedThreat = 0f;
 
-                foreach (float threat in categoryBlockThreats)
+                // The running tally. Start with first element as the base value so we apply the penalty appropriately.
+                float compoundedThreat = categoryThreats[0];
+                for (int i = 1; i < categoryThreats.Count; i++)
                 {
-                    compoundedThreat = (compoundedThreat + threat) * multiplier;
+                    compoundedThreat = (compoundedThreat + categoryThreats[i]) * multiplier;
                 }
 
-                categoryThreatResult += compoundedThreat;
+                totalThreatResult += compoundedThreat;
             }
 
-            // Add both category-based threat and block-specific threat together and return it
-            foreach (var kvp in specificBlockThreatResults)
+            // Apply progressive penalty to each specific block type
+            foreach (var kvp in blockSpecificThreats)
             {
-                categoryThreatResult += kvp.Value;
+                string blockType = kvp.Key;
+                List<float> threats = kvp.Value;
+
+				// We need to retrieve this again because we need the multiplier. Perhaps something to improve on.
+				ThreatDefinition threatD;
+                if (!currentThreatSettings.BlockThreatDefinitions.TryGetValue(blockType, out threatD))
+                    continue;
+
+                float multiplier = (float)threatD.Multiplier;
+                
+                float compoundedThreat = threats[0];
+                for (int i = 1; i < threats.Count; i++)
+                {
+                    compoundedThreat = (compoundedThreat + threats[i]) * multiplier;
+                }
+                totalThreatResult += compoundedThreat;
             }
 
-            return categoryThreatResult;
+			// And we are done. Threatening, yes?
+            return totalThreatResult;
         }
 
         public static int GridMovementScore(List<GridEntity> grids) {
