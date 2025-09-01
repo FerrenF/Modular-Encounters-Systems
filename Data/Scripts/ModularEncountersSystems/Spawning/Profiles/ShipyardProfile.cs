@@ -106,7 +106,7 @@ namespace ModularEncountersSystems.Spawning.Profiles {
 
 			EditorReference = new Dictionary<string, Action<string, object>> {
 
-				{"BlockName", (s, o) => TagParse.TagStringCheck(s, ref BlockName) },
+				{"BlockType", (s, o) => TagParse.TagStringCheck(s, ref BlockName) },
 
 				{"InteractionRadius", (s, o) => TagParse.TagDoubleCheck(s, ref InteractionRadius) },
 				{"MinReputation", (s, o) => TagParse.TagIntCheck(s, ref MinReputation) },

@@ -124,18 +124,14 @@ namespace ModularEncountersSystems.Behavior.Subsystems.Trigger {
 
 
 
-				foreach (var dialogueBank in _dialogueBanks)
+
+				if(_dialogueBank.GetChatProfile(actions.DialogueCueId,ref chat, actions.PlayDialogueToSpecificPlayers))
 				{
-
-					if(dialogueBank.GetChatProfile(actions.DialogueCueId,ref chat, actions.PlayDialogueToSpecificPlayers))
-					{
-						BehaviorLogger.Write(actions.ProfileSubtypeId + ": Attempting Chat Broadcast", BehaviorDebugEnum.Action);
-						_broadcast.BroadcastRequest(chat, command, tempPlayerIdList);
-						break;
-					}
-
+					BehaviorLogger.Write(actions.ProfileSubtypeId + ": Attempting Chat Broadcast", BehaviorDebugEnum.Action);
+					_broadcast.BroadcastRequest(chat, command, tempPlayerIdList);
 
 				}
+
 			}
 
 			if (actions.ProcessStaticEncountersAtLocation)
@@ -925,7 +921,7 @@ namespace ModularEncountersSystems.Behavior.Subsystems.Trigger {
             {
                 BehaviorLogger.Write(actions.ProfileSubtypeId + ": Attempting Antenna SetAntennaThoughtBubble Change Block Count: " + AntennaList.Count, BehaviorDebugEnum.Action);
 
-                var thought = actions.SetAntennaThoughtBubbleName;
+
 
                 var npcdata = _behavior?.CurrentGrid?.Npc;
 
@@ -1004,16 +1000,18 @@ namespace ModularEncountersSystems.Behavior.Subsystems.Trigger {
 					if(newvalue <= 0)
 					{
 						AntennaThoughtBubblePercentageReachedMinTriggered = true;
-
+						newvalue = 0;
                     }
 
 					if (newvalue >= 100)
 					{
                         AntennaThoughtBubblePercentageReachedMaxTriggered = true;
+						newvalue = 100;
                     }
 
+					npcdata.AntennaThoughtBubblePercentage = newvalue;
 
-                    
+
 
                     foreach (var antenna in AntennaList)
                     {
